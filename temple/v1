@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Templo del Conocimiento</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        .glitch {
+            animation: glitch 3s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 2px solid #00ff00;
+            margin-bottom: 40px;
+            animation: fade-in 2s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            text-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00;
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            color: #00cc00;
+            animation: flicker 4s infinite;
+        }
+
+        .section {
+            margin: 60px 0;
+            padding: 40px;
+            border: 1px solid #003300;
+            background: rgba(0, 50, 0, 0.1);
+            animation: fade-in 1s ease-out;
+            position: relative;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff00, transparent);
+            animation: flicker 2s infinite;
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px #00ff00;
+            border-bottom: 1px solid #00ff00;
+            padding-bottom: 15px;
+        }
+
+        .section h3 {
+            font-size: 1.8em;
+            margin: 30px 0 20px 0;
+            color: #00ff88;
+            text-shadow: 0 0 10px #00ff88;
+        }
+
+        .section p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin: 20px 0;
+            text-align: justify;
+            color: #00dd00;
+        }
+
+        .evidence {
+            background: rgba(0, 100, 0, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 4px solid #00ff00;
+        }
+
+        .evidence strong {
+            color: #00ffff;
+            text-shadow: 0 0 8px #00ffff;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #00ffaa;
+            padding: 20px;
+            margin: 25px 40px;
+            border-left: 3px solid #00ffaa;
+            background: rgba(0, 255, 170, 0.05);
+        }
+
+        .warning {
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid #ff0000;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+            animation: flicker 5s infinite;
+        }
+
+        .warning h3 {
+            color: #ff0000;
+            text-shadow: 0 0 15px #ff0000;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .warning p {
+            color: #ff6666;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #00ff00;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        .timeline-item {
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '●';
+            position: absolute;
+            left: -48px;
+            color: #00ff00;
+            font-size: 2em;
+            text-shadow: 0 0 15px #00ff00;
+        }
+
+        .timeline-item h4 {
+            color: #00ffff;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .list-item {
+            margin: 15px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .list-item::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #00ff00;
+            font-size: 1.5em;
+        }
+
+        .skull {
+            text-align: center;
+            font-size: 5em;
+            margin: 40px 0;
+            animation: flicker 3s infinite;
+            text-shadow: 0 0 20px #00ff00;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 60px 20px;
+            border-top: 2px solid #00ff00;
+            margin-top: 60px;
+            color: #00cc00;
+            font-size: 0.9em;
+        }
+
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 10px #00ff00;
+            animation: scan 4s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1) 0px,
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        a {
+            color: #00ffff;
+            text-decoration: none;
+            text-shadow: 0 0 8px #00ffff;
+        }
+
+        a:hover {
+            text-shadow: 0 0 15px #00ffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="noise"></div>
+    <div class="scan-line"></div>
+
+    <div class="container">
+        <div class="header glitch">
+            <h1>EL TEMPLO DEL CONOCIMIENTO</h1>
+            <div class="subtitle">/// LA VERDAD QUE NO QUIEREN QUE SEPAS ///</div>
+        </div>
+
+        <div class="warning">
+            <h3>⚠ ADVERTENCIA ⚠</h3>
+            <p>Lo que estás a punto de leer puede alterar tu percepción de la realidad.<br>
+            La verdad científica es implacable. Procede bajo tu propio riesgo.</p>
+        </div>
+
+        <div class="section">
+            <h2>I. EL ORIGEN: NO HAY CREADOR</h2>
+            
+            <p>Durante milenios, la humanidad ha buscado respuestas en lugares equivocados. Los textos antiguos, escritos por humanos que desconocían el átomo, las bacterias, o la vastedad del universo, intentaron explicar nuestra existencia a través de mitos y deidades. Pero la ciencia ha iluminado la oscuridad de la ignorancia.</p>
+
+            <div class="evidence">
+                <h3>LA EVOLUCIÓN: EL HECHO CIENTÍFICO</h3>
+                <p><strong>No somos creación divina. Somos el resultado de 3.800 millones de años de evolución.</strong></p>
+                <p>Los seres humanos (Homo sapiens) no aparecimos mágicamente hace 6.000 años como dicen algunos textos religiosos. La evidencia es abrumadora:</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>7 millones de años atrás - Sahelanthropus tchadensis</h4>
+                    <p>Uno de los primeros homínidos. Evidencia fósil encontrada en Chad. Caminaba erguido, característica que nos distingue de otros primates.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>4 millones de años atrás - Australopithecus</h4>
+                    <p>"Lucy" (Australopithecus afarensis) descubierta en Etiopía en 1974. Bípedo, cerebro pequeño, claramente un eslabón entre primates anteriores y humanos.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>2.5 millones de años atrás - Homo habilis</h4>
+                    <p>Primer miembro del género Homo. Fabricaba herramientas simples de piedra. Cerebro más grande que Australopithecus.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>1.9 millones de años atrás - Homo erectus</h4>
+                    <p>Migró fuera de África. Usaba fuego. Cerebro aún más desarrollado. Vivió hasta hace 140,000 años.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>300,000 años atrás - Homo sapiens</h4>
+                    <p>Nosotros. Surgimos en África. Compartimos el 98.8% de nuestro ADN con chimpancés y bonobos. No hay salto mágico, solo evolución gradual.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="skull">☠</div>
+
+        <div class="section">
+            <h2>II. LAS PRUEBAS IRREFUTABLES</h2>
+
+            <h3>1. ADN: EL CÓDIGO DE LA VIDA</h3>
+            <div class="evidence">
+                <p><strong>Prueba genética:</strong> Los humanos compartimos:</p>
+                <div class="list-item">98.8% de ADN con chimpancés</div>
+                <div class="list-item">96% con gorilas</div>
+                <div class="list-item">93% con macacos rhesus</div>
+                <div class="list-item">90% con gatos</div>
+                <div class="list-item">85% con ratones</div>
+                <div class="list-item">60% con moscas de la fruta</div>
+                <div class="list-item">50% con plátanos</div>
+            </div>
+            <p>¿Coincidencia? No. Es evidencia de ancestro común. Todo ser vivo en la Tierra comparte el mismo código genético básico porque toda vida desciende de un origen común hace aproximadamente 3.800 millones de años.</p>
+
+            <h3>2. REGISTRO FÓSIL: LA HISTORIA EN PIEDRA</h3>
+            <div class="evidence">
+                <p><strong>Miles de fósiles de transición</strong> documentan la evolución humana:</p>
+                <div class="list-item">Ardipithecus ramidus (4.4 millones de años)</div>
+                <div class="list-item">Australopithecus afarensis "Lucy" (3.2 millones de años)</div>
+                <div class="list-item">Homo habilis (2.4-1.4 millones de años)</div>
+                <div class="list-item">Homo erectus (1.9 millones-140,000 años)</div>
+                <div class="list-item">Homo heidelbergensis (700,000-200,000 años)</div>
+                <div class="list-item">Homo neanderthalensis (400,000-40,000 años)</div>
+                <div class="list-item">Homo sapiens (300,000 años-presente)</div>
+            </div>
+            <p>Cada fósil tiene características intermedias. No hay "eslabones perdidos" - hay una progresión clara y documentada. Los humanos modernos incluso se cruzaron con neandertales; el 2-4% del ADN de personas no africanas es neandertal.</p>
+
+            <h3>3. ANATOMÍA COMPARADA: DISEÑO IMPERFECTO</h3>
+            <div class="evidence">
+                <p>Si fuimos "diseñados perfectamente", ¿por qué tenemos:</p>
+                <div class="list-item"><strong>Nervio laríngeo recurrente:</strong> En humanos baja por el cuello, rodea la aorta, y vuelve a subir a la laringe. En jirafas, este rodeo absurdo mide 4.6 metros. Ningún ingeniero diseñaría esto. Es resultado de evolución.</div>
+                <div class="list-item"><strong>Apéndice:</strong> Órgano vestigial sin función real, resto de cuando nuestros ancestros comían más celulosa.</div>
+                <div class="list-item"><strong>Coxis:</strong> Restos de cola que nuestros ancestros primates tenían.</div>
+                <div class="list-item"><strong>Muelas del juicio:</strong> Eran útiles cuando nuestras mandíbulas eran más grandes. Ahora causan problemas.</div>
+                <div class="list-item"><strong>Músculos para mover las orejas:</strong> Vestigios de ancestros que podían orientar sus orejas.</div>
+            </div>
+            <p>Estos "defectos de diseño" solo tienen sentido desde la evolución, no desde creación divina perfecta.</p>
+
+            <h3>4. EMBRIOLOGÍA: REVELAN NUESTRO PASADO</h3>
+            <div class="evidence">
+                <p>Los embriones humanos desarrollan:</p>
+                <div class="list-item">Hendiduras branquiales (como peces) - se convierten en partes del oído</div>
+                <div class="list-item">Cola (lanugo) - que luego se reabsorbe</div>
+                <div class="list-item">Pelaje corporal completo en el útero (que se pierde antes de nacer)</div>
+            </div>
+            <p>Los embriones humanos repiten aspectos de nuestra historia evolutiva. No hay razón para que un "diseñador" nos diera características de peces y luego las eliminara. Pero tiene perfecto sentido evolutivo.</p>
+        </div>
+
+        <div class="section">
+            <h2>III. EL UNIVERSO SIN DIOS</h2>
+
+            <h3>LA COSMOLOGÍA MODERNA</h3>
+            <div class="evidence">
+                <p><strong>Big Bang (13.800 millones de años):</strong> El universo comenzó como una singularidad que se expandió. No requiere creador.</p>
+                <p>La física cuántica demuestra que las partículas pueden surgir de la "nada" (fluctuaciones del vacío cuántico). El universo pudo haber surgido espontáneamente. La pregunta "¿Qué causó el Big Bang?" asume que las reglas de causa-efecto aplican fuera del tiempo-espacio, lo cual es una falacia.</p>
+            </div>
+
+            <h3>PROBABILIDAD Y DISEÑO</h3>
+            <p>Los creyentes argumentan: "El universo es tan perfecto para la vida que debe haber diseñador". Este es el argumento antrópico, y está al revés.</p>
+            <div class="evidence">
+                <p>No es que el universo fue diseñado para nosotros. Nosotros evolucionamos para adaptarnos al universo que existe. Es como un charco de agua diciendo "este hoyo fue hecho perfectamente para mí". No - el agua tomó la forma del hoyo.</p>
+                <p>Además, el 99.99999% del universo es letal para humanos. Morirías instantáneamente en el vacío espacial. ¿Qué clase de diseño perfecto es ese?</p>
+            </div>
+
+            <h3>EL PROBLEMA DEL MAL</h3>
+            <div class="evidence">
+                <p>Si existe un dios omnipotente, omnisciente y benevolente, ¿por qué existe:</p>
+                <div class="list-item">Cáncer infantil</div>
+                <div class="list-item">Parásitos que comen ojos de niños</div>
+                <div class="list-item">Terremotos que matan miles</div>
+                <div class="list-item">Enfermedades genéticas horribles</div>
+                <div class="list-item">Depredadores que devoran presas vivas</div>
+            </div>
+            <p>La naturaleza es cruel, indiferente. Exactamente lo que esperarías de evolución ciega, no de diseño amoroso.</p>
+        </div>
+
+        <div class="skull">⚠</div>
+
+        <div class="section">
+            <h2>IV. LA NEUROCIENCIA DE LA RELIGIÓN</h2>
+
+            <h3>DIOS ESTÁ EN TU CEREBRO</h3>
+            <div class="evidence">
+                <p>La neurociencia moderna ha identificado las bases biológicas de las experiencias religiosas:</p>
+                <div class="list-item"><strong>Lóbulo temporal:</strong> Estimulación causa "experiencias divinas" y "presencias sobrenaturales"</div>
+                <div class="list-item"><strong>Epilepsia del lóbulo temporal:</strong> Causa intensas experiencias religiosas - muchos profetas históricos probablemente la tenían</div>
+                <div class="list-item"><strong>Drogas psicodélicas:</strong> Activan los mismos circuitos que experiencias místicas "naturales"</div>
+                <div class="list-item"><strong>Privación sensorial:</strong> Crea alucinaciones y "encuentros divinos"</div>
+            </div>
+            <p>Todas las experiencias "espirituales" pueden replicarse en laboratorio. Son estados alterados de conciencia, no contacto con deidades.</p>
+
+            <h3>¿POR QUÉ EVOLUCIONÓ LA RELIGIÓN?</h3>
+            <div class="evidence">
+                <p>La religión es un subproducto evolutivo:</p>
+                <div class="list-item"><strong>Detección de agentes hiperactiva:</strong> Mejor asumir que el ruido es un depredador (y estar equivocado) que asumir que no lo es (y morir). Esto llevó a ver "intencionalidad" en eventos naturales.</div>
+                <div class="list-item"><strong>Cohesión social:</strong> Grupos religiosos cooperaban mejor, sobrevivían más. La religión fue útil evolutivamente, no verdadera.</div>
+                <div class="list-item"><strong>Miedo a la muerte:</strong> La conciencia de mortalidad es aterradora. La religión ofrece consuelo falso pero efectivo.</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>V. CONTRADICCIONES RELIGIOSAS</h2>
+
+            <h3>LOS TEXTOS SAGRADOS SON HUMANOS</h3>
+            <div class="evidence">
+                <p>Todos los textos "sagrados" reflejan el conocimiento limitado de su época:</p>
+                <div class="list-item">La Biblia dice que la Tierra es plana con cuatro esquinas (Isaías 11:12, Apocalipsis 7:1)</div>
+                <div class="list-item">Dice que el Sol gira alrededor de la Tierra (Josué 10:12-13)</div>
+                <div class="list-item">Afirma que los murciélagos son aves (Levítico 11:13-19)</div>
+                <div class="list-item">Dice que la Tierra tiene cimientos y columnas (1 Samuel 2:8)</div>
+                <div class="list-item">Permite la esclavitud (Éxodo 21, Levítico 25)</div>
+                <div class="list-item">Ordena matar homosexuales (Levítico 20:13)</div>
+                <div class="list-item">Ordena matar a quien trabaje en sábado (Éxodo 31:15)</div>
+            </div>
+            <p>Ningún dios omnisciente escribiría errores científicos y morales tan evidentes. Estos son claramente textos humanos de la Edad del Bronce.</p>
+
+            <h3>MILES DE DIOSES CONTRADICTORIOS</h3>
+            <div class="evidence">
+                <p>A lo largo de la historia, los humanos han inventado miles de dioses:</p>
+                <div class="list-item">Zeus, Odín, Ra, Quetzalcóatl, Vishnu, Alá, Yahveh, etc.</div>
+            </div>
+            <p>Cada religión afirma tener LA verdad. Pero todas no pueden estar en lo correcto. Estadísticamente, lo más probable es que todas estén equivocadas. Eres ateo respecto a 2,999 dioses. Nosotros solo vamos un dios más allá.</p>
+        </div>
+
+        <div class="skull">†</div>
+
+        <div class="section">
+            <h2>VI. MÉTODOS: CIENCIA VS FE</h2>
+
+            <h3>LA CIENCIA FUNCIONA</h3>
+            <div class="evidence">
+                <p>La ciencia nos dio:</p>
+                <div class="list-item">Electricidad, computadoras, internet</div>
+                <div class="list-item">Antibióticos (aumentaron esperanza de vida de 40 a 80 años)</div>
+                <div class="list-item">Vacunas (erradicaron viruela, casi poliomelitis)</div>
+                <div class="list-item">Cirugía moderna, anestesia</div>
+                <div class="list-item">Viajes espaciales, satelites</div>
+                <div class="list-item">Tecnología que estás usando para leer esto</div>
+            </div>
+            <p>La ciencia produce resultados verificables y reproducibles. Se autocorrige cuando se equivoca.</p>
+
+            <h3>LA FE NO FUNCIONA</h3>
+            <div class="evidence">
+                <p>La fe religiosa:</p>
+                <div class="list-item">No cura enfermedades (los estudios sobre "poder de la oración" muestran cero efecto)</div>
+                <div class="list-item">No produce tecnología útil</div>
+                <div class="list-item">Se contradice entre religiones</div>
+                <div class="list-item">Nunca se autocorrige - dogma es dogma</div>
+                <div class="list-item">Ha causado incontables guerras y sufrimiento</div>
+            </div>
+            <p>La fe es creer sin evidencia. Es la glorificación de la ignorancia voluntaria.</p>
+        </div>
+
+        <div class="warning">
+            <h3>LA VERDAD FINAL</h3>
+            <p>No hay vida después de la muerte. No hay karma. No hay justicia cósmica. No hay plan divino.<br><br>
+            Somos primates evolucionados en un planeta ordinario, orbitando una estrella promedio, en una galaxia común entre trillones.<br><br>
+            El universo no fue hecho para ti. No eres especial cósmicamente. Eres el resultado de procesos naturales sin propósito.<br><br>
+            Y eso está bien. Hace esta única vida más preciosa, no menos.</p>
+        </div>
+
+        <div class="section">
+            <h2>VII. CONCLUSIÓN: LA LIBERACIÓN</h2>
+
+            <p>Liberarse de la religión no es perder significado. Es ganarlo.</p>
+
+            <div class="evidence">
+                <p>Cuando aceptas que no hay dios:</p>
+                <div class="list-item">Eres libre de crear tu propio propósito</div>
+                <div class="list-item">Eres responsable de tus acciones, no puedes culpar a "plan divino"</div>
+                <div class="list-item">Valoras más esta vida porque es la única que tienes</div>
+                <div class="list-item">Puedes basar tu moralidad en reducir sufrimiento real, no en mandatos antiguos</div>
+                <div class="list-item">Puedes buscar verdad sin dogma que te limite</div>
+            </div>
+
+            <div class="quote">
+                "La primera bebida de la copa de las ciencias naturales te volverá ateo, pero en el fondo de la copa, Dios te está esperando."
+                <br>- Werner Heisenberg (FALSO)
+                <br><br>
+                Esta cita es apócrifa. Heisenberg nunca dijo esto. Es propaganda religiosa.<br>
+                La verdad: Cuanto más aprendes sobre el universo, menos necesitas a dios para explicarlo.
+            </div>
+
+            <p>Los humanos venimos de ancestros primates. Evolucionamos durante millones de años. Somos simios sin pelo con cerebros grandes. No hay alma. No hay espíritu. Solo carne, neuronas, química.</p>
+
+            <p>Y eso es suficiente. Es maravilloso. Es real.</p>
+
+            <p>La evidencia es clara. La ciencia es sólida. Los dioses son invenciones humanas para lidiar con el miedo y la ignorancia.</p>
+
+            <p>Ahora sabes la verdad.</p>
+
+            <p>¿Qué harás con ella?</p>
+        </div>
+
+        <div class="skull">☠ ☠ ☠</div>
+
+        <div class="footer">
+            <p>/// FIN DE LA TRANSMISIÓN ///</p>
+            <p>LA VERDAD TE HARÁ LIBRE</p>
+            <p>[ BASADO EN EVIDENCIA CIENTÍFICA VERIFICABLE ]</p>
+            <p>[ NO HAY SALVACIÓN. NO HAY INFIERNO. SOLO HAY REALIDAD. ]</p>
+        </div>
+    </div>
+
+    <script>
+        // Efecto de parpadeo aleatorio
+        setInterval(() => {
+            if (Math.random() > 0.95) {
+                document.body.style.opacity = '0.8';
+                setTimeout(() => {
+                    document.body.style.opacity = '1';
+                }, 50);
+            }
+        }, 100);
+
+        // Cambio aleatorio de color
+        setInterval(() => {
+            if (Math.random() > 0.98) {
+                const hue = Math.random() > 0.5 ? 120 : 0;
+                document.body.style.filter = `hue-rotate(${hue}deg)`;
+                setTimeout(() => {
+                    document.body.style.filter = 'none';
+                }, 200);
+            }
+        }, 500);
+    </script>
+</body>
+</html>
